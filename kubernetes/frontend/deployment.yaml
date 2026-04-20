@@ -1,0 +1,30 @@
+# ============================================================
+# NexaBank - Frontend Deployment
+# ============================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nexabank-frontend
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nexabank-frontend
+  template:
+    metadata:
+      labels:
+        app: nexabank-frontend
+    spec:
+      containers:
+      - name: nexabank-frontend
+        image: 560705566578.dkr.ecr.us-east-1.amazonaws.com/nexabank-frontend:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"

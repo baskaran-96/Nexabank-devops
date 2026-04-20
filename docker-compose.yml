@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend
+    container_name: nexabank-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - nexabank-net
+
+  backend:
+    build: ./backend
+    container_name: nexabank-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - SECRET_KEY=nexabank-super-secret-key-change-in-prod
+      - FLASK_ENV=production
+    networks:
+      - nexabank-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  nexabank-net:
+    driver: bridge

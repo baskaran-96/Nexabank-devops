@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nexabank-backend
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nexabank-backend
+  template:
+    metadata:
+      labels:
+        app: nexabank-backend
+    spec:
+      containers:
+      - name: nexabank-backend
+        image: 560705566578.dkr.ecr.us-east-1.amazonaws.com/nexabank-backend:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: FLASK_ENV
+          value: "production"
+        - name: SECRET_KEY
+          value: "nexabank-secret-key-2026"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"

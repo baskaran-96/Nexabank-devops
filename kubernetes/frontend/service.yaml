@@ -1,0 +1,16 @@
+# ============================================================
+# NexaBank - Frontend Service
+# ============================================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: nexabank-frontend
+  namespace: default
+spec:
+  selector:
+    app: nexabank-frontend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: LoadBalancer

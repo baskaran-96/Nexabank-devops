@@ -1,0 +1,16 @@
+#====================================================================
+# NexaBank - Backend Service
+#====================================================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: nexabank-backend
+  namespace: default
+spec:
+  selector:
+    app: nexabank-backend
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
+  type: ClusterIP
